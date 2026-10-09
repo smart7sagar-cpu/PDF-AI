@@ -5,7 +5,7 @@ from pypdf import PdfReader
 
 # 1. UI Setup
 st.set_page_config(page_title="Super Fast AI PDF Assistant", layout="wide")
-st.title("🚀 Super-Fast AI PDF Assistant (Made by SAGAR)")
+st.title("🚀 Super-Fast AI PDF Assistant (made by SAGAR)")
 
 # 🔒 Secrets se Groq Key lena
 try:
@@ -33,9 +33,9 @@ if uploaded_files:
     # 1. Detailed Summary Section
     if st.button("📝 PDF ka detailed Summary points me chahiye?"):
         with st.spinner("Groq AI summary bana raha hai (Super Fast)..."):
-            # Llama 3 8B model ka use jo ki lighting fast hai
+            # Update: Using the latest supported free llama model on Groq
             response = client.chat.completions.create(
-                model="llama3-8b-8192",
+                model="llama-3.1-8b-instant",
                 messages=[
                     {"role": "user", "content": f"Niche diye gaye PDF data ka ek clear aur detailed summary points me Hindi me likhein:\n\n{full_context[:30000]}"}
                 ],
@@ -57,8 +57,9 @@ if uploaded_files:
                 "Agar jawab data me nahi hai, to keh dein ki 'Mujhe iska jawab document me nahi mila'."
             )
             
+            # Update: Using the latest supported free llama model on Groq
             response = client.chat.completions.create(
-                model="llama3-8b-8192",
+                model="llama-3.1-8b-instant",
                 messages=[
                     {"role": "system", "content": system_instruction},
                     {"role": "user", "content": f"Context:\n{full_context[:35000]}\n\nSawal: {user_query}"}
