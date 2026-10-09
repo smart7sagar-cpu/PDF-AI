@@ -32,16 +32,16 @@ if uploaded_files:
 
     # 1. Detailed Summary Section
     if st.button("📝 PDF ka detailed Summary points me chahiye?"):
-        with st.spinner("Groq AI summary bana raha hai (Super Fast)..."):
-            # Update: Using the latest supported free llama model on Groq
+        with st.spinner("Groq AI summary bana raha hai..."):
+            # Update: 2026 ka sabse stable aur current free model
             response = client.chat.completions.create(
-                model="llama-3.1-8b-instant",
+                model="llama-3.3-70b-versatile",
                 messages=[
                     {"role": "user", "content": f"Niche diye gaye PDF data ka ek clear aur detailed summary points me Hindi me likhein:\n\n{full_context[:30000]}"}
                 ],
             )
             st.write("### 📋 PDF Summary:")
-            st.write(response.choices[0].message.content)
+            st.write(response.choices.message.content)
 
     # 2. Chat Section with Page Citation
     st.write("---")
@@ -57,9 +57,9 @@ if uploaded_files:
                 "Agar jawab data me nahi hai, to keh dein ki 'Mujhe iska jawab document me nahi mila'."
             )
             
-            # Update: Using the latest supported free llama model on Groq
+            # Update: 2026 ka sabse stable aur current free model
             response = client.chat.completions.create(
-                model="llama-3.1-8b-instant",
+                model="llama-3.3-70b-versatile",
                 messages=[
                     {"role": "system", "content": system_instruction},
                     {"role": "user", "content": f"Context:\n{full_context[:35000]}\n\nSawal: {user_query}"}
@@ -67,4 +67,4 @@ if uploaded_files:
                 temperature=0.3
             )
             st.write("### 🤖 AI ka Jawab:")
-            st.write(response.choices[0].message.content)
+            st.write(response.choices.message.content)
